@@ -1,0 +1,3 @@
+/Users/trygveurdahl/Documents/Skole/NTNU/Sem. 8/TFY4235/Prosjekt 1/build/CMakeFiles/rebuild_cache.dir
+/Users/trygveurdahl/Documents/Skole/NTNU/Sem. 8/TFY4235/Prosjekt 1/build/CMakeFiles/edit_cache.dir
+/Users/trygveurdahl/Documents/Skole/NTNU/Sem. 8/TFY4235/Prosjekt 1/build/CMakeFiles/main.dir
