@@ -14,6 +14,14 @@ std::vec<int> getLogSum(int max) {
   }
 }
 
+std::vec<double> logV(const std::vec<double> &V) {
+  std::vec<double> res(v.size());
+  for (int i = 0; i < v.size; i++) {
+    res(i) = std::log(V(i));
+  }
+  return res;
+}
+
 // C-style random number generator.
 // Input
 // min: lowest possible number generated.

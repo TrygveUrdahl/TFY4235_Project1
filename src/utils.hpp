@@ -1,11 +1,10 @@
 #pragma once
 #include <random>
 
+std::vec<int> getLogSum(int max);
 
-std::vector<long double> iterativeBinominals(int M);
+std::vec<double> logV(const std::vec<double> &V);
 
-// Calculate all binominals from (M 1) to (M M).
-std::vector<long> calculateBinomials(int M);
 
 // C-style random number generator.
 // Input

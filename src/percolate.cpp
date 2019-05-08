@@ -123,6 +123,30 @@ std::vector<int> percolate(std::vector< std::pair<int, int> > &latticeList,
   return mainCluster;
 }
 
-void convolution(int steps) {
-  
+std::vec<double> convolution(int L, const std::vec<double> &Q, const std::vec<double> &pvec, const std::vec<int> &logBin) {
+  const std::vec<double> logQ = logV(Q);
+  const std::vec<int> logSum = getLogSum(L);
+  const int nProbs = pvec.size();
+  const int nBonds = Q.size();
+  std::vec<double> Qprob(nProbs);
+
+  #pragma omp parallel for schedule(static)
+  for (int i = 0; i < nProbs; i++) {
+    const double prob = pvec(i);
+    const double logProb = std::log(prob);
+    const double logNotProb = std::log(1.0 - prob);
+
+    double Qpi = 0;
+    for (int j = 0; j < nBonds; j++) {
+      const double a = logBin(j);
+      const double b = j * logProb;
+      const double c = (nBonds - j) * logNotProb;
+      const double d = logQ(j);
+
+      const double term = a + b + c + d;
+      Qpi += term;
+    }
+    Qprob(i) = Qpi;
+  }
+  return Qprob;
 }
