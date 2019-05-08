@@ -49,7 +49,6 @@ std::vector<int> extractAllClusters(std::vector<int> &nodeStatusList) {
 }
 
 
-
 // Function to update one bond in the nodeStatusList.
 // Inputs
 // nodeStatusList: list of which nodes are root nodes and which are not.
@@ -68,26 +67,26 @@ void updateNodeStatusListOnce(std::vector< std::pair<int, int> > &latticeList,
   else { // Different clusters, need to be combined
     if (nodeStatusList.at(firstRoot) < nodeStatusList.at(secondRoot)) {
       // Calculate average cluster size
-      averageS -= pow(nodeStatusList.at(firstRoot), 2);
-      averageS -= pow(nodeStatusList.at(secondRoot), 2);
-      averageS += pow(nodeStatusList.at(firstRoot) + nodeStatusList.at(secondRoot), 2);
+      averageS -= std::pow(nodeStatusList.at(firstRoot), 2);
+      averageS -= std::pow(nodeStatusList.at(secondRoot), 2);
+      averageS += std::pow(nodeStatusList.at(firstRoot) + nodeStatusList.at(secondRoot), 2);
 
       nodeStatusList.at(firstRoot) += nodeStatusList.at(secondRoot);
       nodeStatusList.at(secondRoot) = firstRoot;
-      if (abs(nodeStatusList.at(firstRoot)) > abs(largestCluster.second)) {
+      if (std::abs(nodeStatusList.at(firstRoot)) > std::abs(largestCluster.second)) {
         largestCluster.first = firstRoot;
         largestCluster.second = nodeStatusList.at(firstRoot);
       }
     }
     else {
       // Calculate average cluster size
-      averageS -= pow(nodeStatusList.at(firstRoot), 2);
-      averageS -= pow(nodeStatusList.at(secondRoot), 2);
-      averageS += pow(nodeStatusList.at(firstRoot) + nodeStatusList.at(secondRoot), 2);
+      averageS -= std::pow(nodeStatusList.at(firstRoot), 2);
+      averageS -= std::pow(nodeStatusList.at(secondRoot), 2);
+      averageS += std::pow(nodeStatusList.at(firstRoot) + nodeStatusList.at(secondRoot), 2);
 
       nodeStatusList.at(secondRoot) += nodeStatusList.at(firstRoot);
       nodeStatusList.at(firstRoot) = secondRoot;
-      if (abs(nodeStatusList.at(secondRoot)) > abs(largestCluster.second)) {
+      if (std::abs(nodeStatusList.at(secondRoot)) > std::abs(largestCluster.second)) {
         largestCluster.first = secondRoot;
         largestCluster.second = nodeStatusList.at(secondRoot);
       }
@@ -110,10 +109,10 @@ std::vector<int> percolate(std::vector< std::pair<int, int> > &latticeList,
   float Pinf, PinfSquared, sMedian;
   for (int i = 0; i < numBondsToActivate; i++) {
     updateNodeStatusListOnce(latticeList, nodeStatusList, i, largestCluster, averageS);
-    Pinf = abs(largestCluster.second)/numNodes;
+    Pinf = std::abs(largestCluster.second)/numNodes;
     //std::cout << "Largest: " << largestCluster.second << ". numNodes: " << numNodes << std::endl;
-    PinfSquared = pow((largestCluster.second/numNodes), 2);
-    sMedian = (averageS - pow(numNodes * Pinf, 2))/(numNodes * (1 - Pinf));
+    PinfSquared = std::pow((largestCluster.second/numNodes), 2);
+    sMedian = (averageS - std::pow(numNodes * Pinf, 2))/(numNodes * (1 - Pinf));
     PinfArray.push_back(Pinf);
     PinfSquaredArray.push_back(PinfSquared);
     sMedianArray.push_back(sMedian);
@@ -125,5 +124,5 @@ std::vector<int> percolate(std::vector< std::pair<int, int> > &latticeList,
 }
 
 void convolution(int steps) {
-
+  
 }

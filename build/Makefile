@@ -111,17 +111,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named main
+# Target rules for targets named project1
 
 # Build rule for target.
-main: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 main
-.PHONY : main
+project1: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 project1
+.PHONY : project1
 
 # fast build rule for target.
-main/fast:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/build
-.PHONY : main/fast
+project1/fast:
+	$(MAKE) -f CMakeFiles/project1.dir/build.make CMakeFiles/project1.dir/build
+.PHONY : project1/fast
 
 latticegenerator.o: latticegenerator.cpp.o
 
@@ -129,7 +129,7 @@ latticegenerator.o: latticegenerator.cpp.o
 
 # target to build an object file
 latticegenerator.cpp.o:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/latticegenerator.cpp.o
+	$(MAKE) -f CMakeFiles/project1.dir/build.make CMakeFiles/project1.dir/latticegenerator.cpp.o
 .PHONY : latticegenerator.cpp.o
 
 latticegenerator.i: latticegenerator.cpp.i
@@ -138,7 +138,7 @@ latticegenerator.i: latticegenerator.cpp.i
 
 # target to preprocess a source file
 latticegenerator.cpp.i:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/latticegenerator.cpp.i
+	$(MAKE) -f CMakeFiles/project1.dir/build.make CMakeFiles/project1.dir/latticegenerator.cpp.i
 .PHONY : latticegenerator.cpp.i
 
 latticegenerator.s: latticegenerator.cpp.s
@@ -147,7 +147,7 @@ latticegenerator.s: latticegenerator.cpp.s
 
 # target to generate assembly for a file
 latticegenerator.cpp.s:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/latticegenerator.cpp.s
+	$(MAKE) -f CMakeFiles/project1.dir/build.make CMakeFiles/project1.dir/latticegenerator.cpp.s
 .PHONY : latticegenerator.cpp.s
 
 main.o: main.cpp.o
@@ -156,7 +156,7 @@ main.o: main.cpp.o
 
 # target to build an object file
 main.cpp.o:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/main.cpp.o
+	$(MAKE) -f CMakeFiles/project1.dir/build.make CMakeFiles/project1.dir/main.cpp.o
 .PHONY : main.cpp.o
 
 main.i: main.cpp.i
@@ -165,7 +165,7 @@ main.i: main.cpp.i
 
 # target to preprocess a source file
 main.cpp.i:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/main.cpp.i
+	$(MAKE) -f CMakeFiles/project1.dir/build.make CMakeFiles/project1.dir/main.cpp.i
 .PHONY : main.cpp.i
 
 main.s: main.cpp.s
@@ -174,7 +174,7 @@ main.s: main.cpp.s
 
 # target to generate assembly for a file
 main.cpp.s:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/main.cpp.s
+	$(MAKE) -f CMakeFiles/project1.dir/build.make CMakeFiles/project1.dir/main.cpp.s
 .PHONY : main.cpp.s
 
 percolate.o: percolate.cpp.o
@@ -183,7 +183,7 @@ percolate.o: percolate.cpp.o
 
 # target to build an object file
 percolate.cpp.o:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/percolate.cpp.o
+	$(MAKE) -f CMakeFiles/project1.dir/build.make CMakeFiles/project1.dir/percolate.cpp.o
 .PHONY : percolate.cpp.o
 
 percolate.i: percolate.cpp.i
@@ -192,7 +192,7 @@ percolate.i: percolate.cpp.i
 
 # target to preprocess a source file
 percolate.cpp.i:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/percolate.cpp.i
+	$(MAKE) -f CMakeFiles/project1.dir/build.make CMakeFiles/project1.dir/percolate.cpp.i
 .PHONY : percolate.cpp.i
 
 percolate.s: percolate.cpp.s
@@ -201,7 +201,7 @@ percolate.s: percolate.cpp.s
 
 # target to generate assembly for a file
 percolate.cpp.s:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/percolate.cpp.s
+	$(MAKE) -f CMakeFiles/project1.dir/build.make CMakeFiles/project1.dir/percolate.cpp.s
 .PHONY : percolate.cpp.s
 
 utils.o: utils.cpp.o
@@ -210,7 +210,7 @@ utils.o: utils.cpp.o
 
 # target to build an object file
 utils.cpp.o:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/utils.cpp.o
+	$(MAKE) -f CMakeFiles/project1.dir/build.make CMakeFiles/project1.dir/utils.cpp.o
 .PHONY : utils.cpp.o
 
 utils.i: utils.cpp.i
@@ -219,7 +219,7 @@ utils.i: utils.cpp.i
 
 # target to preprocess a source file
 utils.cpp.i:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/utils.cpp.i
+	$(MAKE) -f CMakeFiles/project1.dir/build.make CMakeFiles/project1.dir/utils.cpp.i
 .PHONY : utils.cpp.i
 
 utils.s: utils.cpp.s
@@ -228,7 +228,7 @@ utils.s: utils.cpp.s
 
 # target to generate assembly for a file
 utils.cpp.s:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/utils.cpp.s
+	$(MAKE) -f CMakeFiles/project1.dir/build.make CMakeFiles/project1.dir/utils.cpp.s
 .PHONY : utils.cpp.s
 
 # Help Target
@@ -239,7 +239,7 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
-	@echo "... main"
+	@echo "... project1"
 	@echo "... latticegenerator.o"
 	@echo "... latticegenerator.i"
 	@echo "... latticegenerator.s"

@@ -34,36 +34,20 @@ std::vector< std::pair<int, int> > generateSquareLattice(int L, std::string file
 // L: width/height of lattice (which is of size N = L*L)
 // filename: name of output file to which the triangular lattice is written
 std::vector< std::pair<int, int> > generateTriangularLattice(int L, std::string filename) {
-  int numNodes = L*L;
-  std::vector< std::pair<int, int> > latticeList;
-  latticeList.reserve(numNodes);
-  for (int i = 0; i < numNodes; i++) {
-    std::pair<int, int> bondRight       = std::make_pair(i, i + 1);
-    std::pair<int, int> bondBottomLeft  = std::make_pair(i, i + L - 1);
-    std::pair<int, int> bondBottomRight = std::make_pair(i, i + L);
-    // TODO: edge case fixes
-    if ((i + 1) % L == 0) {
-      bondRight.second = i - L + 1;
+  int numNodes = 3 * L * L;
+  std::vector< std::pair<int, int> > latticeList(numNodes);
+  for (int i = 0; i < L; i++) {
+    for (int j = 0; j < L; j++) {
+      int right = (j + 1)%L + i*L;
+      int downRight = (i + 1)%L*L + j;
+      int downLeft = (i + 1)%L*L + (j + L - 1)%L;
+
+      int idx = j + i*L;
+      latticeList(3 * idx) = std::make_pair(idx, right);
+      latticeList(3 * idx + 1) = std::make_pair(idx, downRight);
+      latticeList(3 * idx + 2) = std::make_pair(idx, downLeft);
     }
-    if (i % L == 0) {
-      bondBottomLeft.second = i + L + (L - 1);
-      if (( (i / L) % 2) == 1) {
-        bondBottomLeft.second = i + L;
-        bondBottomRight.second = i + L + 1;
-      }
-    }
-    if ((i + 1) > L * (L - 1)) {
-      bondBottomLeft.second  = i % L;
-      bondBottomRight.second = i % L + 1;
-      if ((i + 1) % L == 0) {
-        bondBottomRight.second = 0;
-      }
-    }
-    latticeList.push_back(bondRight);
-    latticeList.push_back(bondBottomLeft);
-    latticeList.push_back(bondBottomRight);
   }
-  //writeLatticeToFile(latticeList, filename, numNodes);
   return latticeList;
 }
 
@@ -72,11 +56,39 @@ std::vector< std::pair<int, int> > generateTriangularLattice(int L, std::string 
 // L: width/height of lattice (which is of size N = L*L)
 // filename: name of output file to which the honeycomb lattice is written
 std::vector< std::pair<int, int> > generateHoneycombLattice(int L, std::string filename) {
-  int numNodes;
+  int numNodes = 3*L*L/2;
   std::vector< std::pair<int, int> > latticeList;
-  latticeList.reserve(numNodes);
+  latticeList.resize(numNodes);
+  int k = 0;
+  for (int i = 0; i < L; i++) {
+    for (int j = 0; j < L; j++) {
+      std::pair<int, int> bond0, bond1, bond2, bond3, bond4, bond5;
+      int idx = j + i*L;
+      int node0 = idx;
+      int node1 = idx + 1;
+      int node2 = idx + 2;
+      int node3 = idx + 3;
+      int node;
 
+      node = (i + L - 1)%L*L + (j + n -1)%n;
+      latticeList(k) = std::make_pair(node0, node);
+      k++;
+      latticeList(k) = std::make_pair(node0, node1);
+      k++;
 
-  //writeLatticeToFile(latticeList, filename, numNodes);
+      node = (i + L - 1)%L*L + (j + 1 + 1)/L;
+      latticeList(k) = std::make_pair(node1, node);
+      k++;
+      latticeList(k) = std::make_pair(node1, node2);
+      k++;
+
+      latticeList(k) = std::make_pair(node2, node3);
+      k++;
+
+      node = i * L + (j + 4)%L;
+      latticeList(k) = std::make_pair(node3, node);
+      k++;
+    }
+  }
   return latticeList;
 }

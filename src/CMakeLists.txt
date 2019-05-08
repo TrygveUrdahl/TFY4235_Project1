@@ -1,12 +1,24 @@
 cmake_minimum_required(VERSION 3.1)
 
-project(project1 CXX)
-#set(CMAKE_CXX_STANDARD 11)
-#set(CMAKE_CXX_STANDARD_REQUIRED on)
+project(TFY4235_Project_1 CXX C)
 
 add_compile_options(-std=c++17 -O3)
-#SET(CMAKE_CXX_COMPILER "/usr/local/Cellar/gcc/8.2.0/bin/c++-8")
 
 find_package(OpenMP)
-add_executable(main main.cpp utils.cpp latticegenerator.cpp percolate.cpp)
-target_link_libraries(main PRIVATE OpenMP::OpenMP_CXX)
+find_package(HDF5 REQUIRED)
+find_package(Armadillo REQUIRED)
+
+file(GLOB proj_SRC
+    "*.cpp"
+)
+
+include_directories(${ARMADILLO_INCLUDE_DIRS} ${HDF5_INCLUDE_DIR})
+set(_hdf5_libs hdf5 hdf5_cpp)
+add_executable(project1 ${proj_SRC})
+target_link_libraries(project1 PUBLIC ${_hdf5_libs})
+target_link_libraries(project1 PUBLIC ${ARMADILLO_LIBRARIES})
+target_include_directories(project1 PRIVATE ${ARMADILLO_INCLUDE_DIRS})
+
+if(OpenMP_CXX_FOUND)
+    target_link_libraries(project1 PUBLIC OpenMP::OpenMP_CXX)
+endif()

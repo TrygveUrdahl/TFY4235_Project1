@@ -6,39 +6,12 @@
 #include <sstream>
 #include <random>
 
-
-
-std::vector<long double> iterativeBinominals(int M) {
-  std::vector<long double> binominals(M + 1);
-  binominals.at(0) = 1;
-  for (int n = 1; n <= M; n++) {
-    binominals.at(n) = ((M - n + 1) / (n)) * binominals.at(n - 1);
+std::vec<int> getLogSum(int max) {
+  std::vec<int> logSum(max + 1);
+  logSum(0) = 0;
+  for (int i = 1; i < max + 1; i++) {
+    logSum(i) = logSum(i - 1) + std::log(i);
   }
-  return binominals;
-}
-
-// Function to return binominal of (n choose k).
-// Time complexity of O(k) and auxillary space of O(1).
-unsigned long long calculateBinomial(long n, long k) {
-  unsigned long long res = 1;
-  if (k > (n - k)) {
-    k = n - k;
-  }
-  for (long i = 0; i < k; ++i) {
-    res *= (n - i);
-    res /= (i + 1);
-  }
-  return res;
-}
-
-// Calculate all binominals from (M 1) to (M M).
-std::vector<long> calculateBinomials(int M) {
-  std::vector<long> binominals(M + 1);
-  #pragma omp parallel for schedule(dynamic)
-  for (int i = 0; i <= M; i++) {
-    binominals.at(i) = calculateBinomial(M, i);
-  }
-  return binominals;
 }
 
 // C-style random number generator.
@@ -97,7 +70,7 @@ std::vector< std::pair<int, int> > readLatticeFromFile(std::string filename) {
   std::ifstream file;
   file.open(filename);
   if (!file.is_open()) {
-    // TODO: Raise error!
+    throw std::runtime_error("File not opened! ")
   }
 
   std::string line;
@@ -123,7 +96,7 @@ void writeLatticeToFile(std::vector< std::pair<int, int> > &lattice, std::string
   std::ofstream file;
   file.open(filename);
   if (!file.is_open()) {
-    // TODO: Raise error!
+    throw std::runtime_error("File not opened! ")
   }
   file << numNodes << " " << lattice.size() << std::endl;
   for (auto bond : lattice) {
@@ -140,7 +113,7 @@ void writeVectorToFile(std::vector<int> &theVector, std::string filename = "../o
   std::ofstream file;
   file.open(filename);
   if (!file.is_open()) {
-    // TODO: Raise error!
+    throw std::runtime_error("File not opened! ")
   }
   for (auto elem : theVector) {
     file << elem << std::endl;

@@ -5,11 +5,10 @@
 #include "latticegenerator.hpp"
 #include "percolate.hpp"
 #include "utils.hpp"
-#include "omp.h"
 
 int main(int argc, char** argv) {
   if (argc < 2) {
-        std::cout << "Need one parameter: \nThe width of the lattice. " << std::endl;
+        std::cout << "Need one parameter: \n\tThe width of the lattice. " << std::endl;
         return 1;
   }
   srand(time(NULL));
