@@ -6,18 +6,27 @@
 #include <sstream>
 #include <random>
 
-std::vec<int> getLogSum(int max) {
-  std::vec<int> logSum(max + 1);
-  logSum(0) = 0;
+
+// Tabulate the log-sum up till (and including) max, and return as a vector
+// Input
+// int max: highest value (+ 1) to find the log-sum of
+std::vector<int> getLogSum(int max) {
+  std::vector<int> logSum(max + 1);
+  logSum.at(0) = 0;
   for (int i = 1; i < max + 1; i++) {
-    logSum(i) = logSum(i - 1) + std::log(i);
+    logSum.at(i) = logSum.at(i - 1) + std::log(i);
   }
+  return logSum;
 }
 
-std::vec<double> logV(const std::vec<double> &V) {
-  std::vec<double> res(v.size());
-  for (int i = 0; i < v.size; i++) {
-    res(i) = std::log(V(i));
+
+// Calculate element-wise logarithm of a vector V
+// Input
+// vector V: Vector to find logarithms of
+std::vector<double> logV(const std::vector<double> &V) {
+  std::vector<double> res(V.size());
+  for (int i = 0; i < V.size(); i++) {
+    res.at(i) = std::log(V.at(i));
   }
   return res;
 }
@@ -78,7 +87,7 @@ std::vector< std::pair<int, int> > readLatticeFromFile(std::string filename) {
   std::ifstream file;
   file.open(filename);
   if (!file.is_open()) {
-    throw std::runtime_error("File not opened! ")
+    throw std::runtime_error("File not opened! ");
   }
 
   std::string line;
@@ -104,7 +113,7 @@ void writeLatticeToFile(std::vector< std::pair<int, int> > &lattice, std::string
   std::ofstream file;
   file.open(filename);
   if (!file.is_open()) {
-    throw std::runtime_error("File not opened! ")
+    throw std::runtime_error("File not opened! ");
   }
   file << numNodes << " " << lattice.size() << std::endl;
   for (auto bond : lattice) {
@@ -121,7 +130,7 @@ void writeVectorToFile(std::vector<int> &theVector, std::string filename = "../o
   std::ofstream file;
   file.open(filename);
   if (!file.is_open()) {
-    throw std::runtime_error("File not opened! ")
+    throw std::runtime_error("File not opened! ");
   }
   for (auto elem : theVector) {
     file << elem << std::endl;

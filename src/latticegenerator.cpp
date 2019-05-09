@@ -43,9 +43,9 @@ std::vector< std::pair<int, int> > generateTriangularLattice(int L, std::string 
       int downLeft = (i + 1)%L*L + (j + L - 1)%L;
 
       int idx = j + i*L;
-      latticeList(3 * idx) = std::make_pair(idx, right);
-      latticeList(3 * idx + 1) = std::make_pair(idx, downRight);
-      latticeList(3 * idx + 2) = std::make_pair(idx, downLeft);
+      latticeList.at(3 * idx) = std::make_pair(idx, right);
+      latticeList.at(3 * idx + 1) = std::make_pair(idx, downRight);
+      latticeList.at(3 * idx + 2) = std::make_pair(idx, downLeft);
     }
   }
   return latticeList;
@@ -70,23 +70,23 @@ std::vector< std::pair<int, int> > generateHoneycombLattice(int L, std::string f
       int node3 = idx + 3;
       int node;
 
-      node = (i + L - 1)%L*L + (j + n -1)%n;
-      latticeList(k) = std::make_pair(node0, node);
+      node = (i + L - 1)%L*L + (j + L -1)%L;
+      latticeList.at(k) = std::make_pair(node0, node);
       k++;
-      latticeList(k) = std::make_pair(node0, node1);
+      latticeList.at(k) = std::make_pair(node0, node1);
       k++;
 
       node = (i + L - 1)%L*L + (j + 1 + 1)/L;
-      latticeList(k) = std::make_pair(node1, node);
+      latticeList.at(k) = std::make_pair(node1, node);
       k++;
-      latticeList(k) = std::make_pair(node1, node2);
+      latticeList.at(k) = std::make_pair(node1, node2);
       k++;
 
-      latticeList(k) = std::make_pair(node2, node3);
+      latticeList.at(k) = std::make_pair(node2, node3);
       k++;
 
       node = i * L + (j + 4)%L;
-      latticeList(k) = std::make_pair(node3, node);
+      latticeList.at(k) = std::make_pair(node3, node);
       k++;
     }
   }

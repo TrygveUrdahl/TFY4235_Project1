@@ -1,9 +1,17 @@
 #pragma once
 #include <random>
 
-std::vec<int> getLogSum(int max);
 
-std::vec<double> logV(const std::vec<double> &V);
+// Tabulate the log-sum up till (and including) max, and return as a vector
+// Input
+// int max: highest value (+ 1) to find the log-sum of
+std::vector<int> getLogSum(int max);
+
+
+// Calculate element-wise logarithm of a vector V
+// Input
+// vector V: Vector to find logarithms of
+std::vector<double> logV(const std::vector<double> &V);
 
 
 // C-style random number generator.

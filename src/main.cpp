@@ -2,6 +2,7 @@
 #include <utility>
 #include <vector>
 #include <string>
+#include <random>
 #include "latticegenerator.hpp"
 #include "percolate.hpp"
 #include "utils.hpp"

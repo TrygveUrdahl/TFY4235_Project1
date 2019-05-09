@@ -107,46 +107,47 @@ std::vector<int> percolate(std::vector< std::pair<int, int> > &latticeList,
   std::vector<float> sMedianArray;
   float averageS = static_cast<float>(numNodes);
   float Pinf, PinfSquared, sMedian;
+  // Activate bonds
   for (int i = 0; i < numBondsToActivate; i++) {
     updateNodeStatusListOnce(latticeList, nodeStatusList, i, largestCluster, averageS);
     Pinf = std::abs(largestCluster.second)/numNodes;
-    //std::cout << "Largest: " << largestCluster.second << ". numNodes: " << numNodes << std::endl;
     PinfSquared = std::pow((largestCluster.second/numNodes), 2);
     sMedian = (averageS - std::pow(numNodes * Pinf, 2))/(numNodes * (1 - Pinf));
     PinfArray.push_back(Pinf);
     PinfSquaredArray.push_back(PinfSquared);
     sMedianArray.push_back(sMedian);
   }
-  std::cout << "Pinf: " << Pinf  << ". PinfSquared: " << PinfSquared << ". sMedian: " << sMedian << std::endl;
   std::vector<int> mainCluster = extractMainCluster(nodeStatusList, largestCluster);
 
   return mainCluster;
 }
 
-std::vec<double> convolution(int L, const std::vec<double> &Q, const std::vec<double> &pvec, const std::vec<int> &logBin) {
-  const std::vec<double> logQ = logV(Q);
-  const std::vec<int> logSum = getLogSum(L);
+
+// Compute convolution of measurement Q with probabilites in pvec.
+std::vector<double> convolution(int L, const std::vector<double> &Q, const std::vector<double> &pvec, const std::vector<int> &logBin) {
+  const std::vector<double> logQ = logV(Q);
+  const std::vector<int> logSum = getLogSum(L);
   const int nProbs = pvec.size();
   const int nBonds = Q.size();
-  std::vec<double> Qprob(nProbs);
+  std::vector<double> Qprob(nProbs);
 
   #pragma omp parallel for schedule(static)
   for (int i = 0; i < nProbs; i++) {
-    const double prob = pvec(i);
+    const double prob = pvec.at(i);
     const double logProb = std::log(prob);
     const double logNotProb = std::log(1.0 - prob);
 
     double Qpi = 0;
     for (int j = 0; j < nBonds; j++) {
-      const double a = logBin(j);
+      const double a = logBin.at(j);
       const double b = j * logProb;
       const double c = (nBonds - j) * logNotProb;
-      const double d = logQ(j);
+      const double d = logQ.at(j);
 
       const double term = a + b + c + d;
       Qpi += term;
     }
-    Qprob(i) = Qpi;
+    Qprob.at(i) = Qpi;
   }
   return Qprob;
 }
